@@ -1,5 +1,3 @@
-# attack_test.py
-
 from ecc_core import generate_invalid_point, scalar_mult
 from client import send_point
 

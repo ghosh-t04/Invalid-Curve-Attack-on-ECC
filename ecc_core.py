@@ -1,5 +1,3 @@
-# ecc_core.py
-
 import random
 import time
 
@@ -8,7 +6,7 @@ p = 233
 a = 1
 b = 1
 
-# ---------------- MODULAR INVERSE ----------------
+# MODULAR INVERSE
 def modinv(a_, p_):
     t, newt = 0, 1
     r, newr = p_, a_ % p_
@@ -22,7 +20,7 @@ def modinv(a_, p_):
         t += p_
     return t
 
-# ---------------- POINT ADDITION ----------------
+# POINT ADDITION
 def point_add(P, Q):
     if P is None:
         return Q
@@ -32,20 +30,27 @@ def point_add(P, Q):
     x1, y1 = P
     x2, y2 = Q
 
+    # Point at infinity
     if x1 == x2 and (y1 + y2) % p == 0:
         return None
 
     if P != Q:
-        m = ((y2 - y1) * modinv(x2 - x1, p)) % p
+        inv = modinv(x2 - x1, p)
+        if inv is None:
+            return None 
+        m = ((y2 - y1) * inv) % p
     else:
-        m = ((3 * x1 * x1 + a) * modinv(2 * y1, p)) % p
+        inv = modinv(2 * y1, p)
+        if inv is None:
+            return None
+        m = ((3 * x1 * x1 + a) * inv) % p
 
     x3 = (m*m - x1 - x2) % p
     y3 = (m*(x1 - x3) - y1) % p
 
     return (x3, y3)
 
-# ---------------- SCALAR MULTIPLICATION ----------------
+# SCALAR MULTIPLICATION
 def scalar_mult(k, P):
     R = None
     Q = P
@@ -56,16 +61,30 @@ def scalar_mult(k, P):
         k >>= 1
     return R
 
-# ---------------- CURVE VALIDATION ----------------
+# CURVE VALIDATION
 def is_on_curve(P):
     if P is None:
         return True
     x, y = P
     return (y*y - (x*x*x + a*x + b)) % p == 0
 
-# ---------------- INVALID POINT GENERATOR ----------------
+# INVALID POINT GENERATOR
 def generate_invalid_point():
     while True:
         P = (random.randint(0, p-1), random.randint(0, p-1))
         if not is_on_curve(P):
             return P
+        
+
+# STRONG INVALID CURVE LEAKAGE DETECTOR
+def strong_leakage_detect(P, private_key):
+    SMALL_ORDERS = [2, 3, 4, 5, 7, 11, 13]
+
+    for n in SMALL_ORDERS:
+        Q_full = scalar_mult(private_key, P)
+        Q_reduced = scalar_mult(private_key % n, P)
+
+        if Q_full == Q_reduced:
+            return True
+
+    return False

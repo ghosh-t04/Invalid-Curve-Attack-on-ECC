@@ -1,11 +1,9 @@
-# server.py
-
 import socket
 import pickle
 from ecc_core import scalar_mult, is_on_curve
 
-PRIVATE_KEY = 37     # Secret key
-VALIDATION = False  # Toggle protection
+PRIVATE_KEY = 37   
+VALIDATION = False  
 
 def handle_point(P):
     if VALIDATION and not is_on_curve(P):
