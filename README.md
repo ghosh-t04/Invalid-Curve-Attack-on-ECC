@@ -43,15 +43,15 @@ This project demonstrates:
 
 ## Features
 
-- ✅ ECC arithmetic implemented **from scratch**
-- ✅ Uses **real-world 256-bit curve (NIST P-256 / secp256r1)**
-- ✅ Tkinter GUI for easy demonstration
-- ✅ Multiple attack simulations
-- ✅ Multiple prevention mechanisms
-- ✅ Automated **25 test cases per attack**
-- ✅ Attack success comparison
-- ✅ Graph-based analysis
-- ✅ Before vs After prevention evaluation
+- ECC arithmetic implemented **from scratch**
+- Uses **real-world 256-bit curve (NIST P-256 / secp256r1)**
+- Tkinter GUI for easy demonstration
+- Multiple attack simulations
+- Multiple prevention mechanisms
+- Automated **25 test cases per attack**
+- Attack success comparison
+- Graph-based analysis
+- Before vs After prevention evaluation
 
 
 
@@ -76,7 +76,7 @@ This project demonstrates:
 - Security Improvement
 
 
-## 🗂 Project Structure
+## Project Structure
 
 ```text
 Invalid-Curve-ECC/
@@ -89,7 +89,7 @@ Invalid-Curve-ECC/
 
 ---
 
-## ⚙️ Technologies Used
+## Technologies Used
 
 * **Python 3**
 * **Tkinter** (GUI)
