@@ -84,7 +84,6 @@ Invalid-Curve-ECC/
 ├── ecc_core.py        # ECC math, attacks, validations, prevention logic
 ├── gui.py             # Tkinter GUI + logs + graph generation
 ├── README.md          # Project documentation
-└── (optional) report/ # Report, screenshots, PPT, etc.
 ````
 
 ---
